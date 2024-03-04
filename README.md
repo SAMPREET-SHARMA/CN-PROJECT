@@ -47,7 +47,7 @@ python main.py**`
   - Hosts and ports to monitor are defined within this class.
   - Speed testers are created and started, and their signals are connected to update GUI labels.
 
-- *Excel Data Logging:*
+- ***Excel Data Logging:***
   - The application writes speed data to an Excel file named speed_data.xlsx.
   - Each row contains information about a specific host, including download speed, upload speed, and ping time.
 
