@@ -12,24 +12,24 @@ Ensure Python is installed on your system. You can download and install Python f
 
 Once Python is installed, you can install the required Python packages using pip, a package manager for Python. Open your terminal or command prompt and execute the following command:
 
-_**
-pip install PyQt5 openpyxl**_
+(`**
+pip install PyQt5 openpyxl**)
 
 
 #### Clone the Repository:
 
 Clone this GitHub repository to your local machine. You can do this by navigating to the directory where you want to store the repository and executing the following command in your terminal or command prompt:
 
-_**
-git clone https://github.com/your-username/real-time-speed-monitor.git**_
+(`**
+git clone https://github.com/your-username/real-time-speed-monitor.git**)
 
 
 #### Run the Application:
 
 Navigate to the directory containing the cloned repository. You can do this by using the cd command followed by the path to the directory. Once you're in the correct directory, execute the following command in your terminal or command prompt:
 
-_**
-python main.py**_
+(`**
+python main.py**)
 
 
 ### Overview of the Code
