@@ -12,8 +12,8 @@ Ensure Python is installed on your system. You can download and install Python f
 
 Once Python is installed, you can install the required Python packages using pip, a package manager for Python. Open your terminal or command prompt and execute the following command:
 
-_**bash
-pip install PyQt5 openpyxl**_
+(_**bash
+pip install PyQt5 openpyxl**_)
 
 
 #### Clone the Repository:
