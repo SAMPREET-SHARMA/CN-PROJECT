@@ -34,10 +34,9 @@ class SpeedTester(QtCore.QThread):
 
     def measure_speed(self):
         context = ssl.create_default_context()
-        context.verify_mode = ssl.CERT_REQUIRED  # Certificate validation is required
-        context.check_hostname = True  # Check hostname against the certificate
-        context.load_default_certs()  # Load default CA certificates
-
+        context.verify_mode = ssl.CERT_REQUIRED 
+        context.check_hostname = True  
+        context.load_default_certs()  
         with socket.create_connection((self.host, self.port)) as sock:
             with context.wrap_socket(sock, server_hostname=self.host) as ssock:
                 start_time = time.time()
@@ -70,11 +69,11 @@ class SpeedTester(QtCore.QThread):
     def measure_ping(self):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-                sock.settimeout(5)  # Set socket timeout to 5 seconds
+                sock.settimeout(5) 
                 start_time = time.time()
                 sock.connect((self.host, self.port))
                 end_time = time.time()
-                self.ping_time = (end_time - start_time) * 1000  # Convert to milliseconds
+                self.ping_time = (end_time - start_time) * 1000  
         except (socket.timeout, socket.error):
             self.ping_time = 0
 
@@ -91,8 +90,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.speed_labels = {}
         self.speed_testers = []
 
-        # Define hosts and ports to monitor
-        hosts_ports = [ ('www.pesuacademy.com', 443),('www.facebook.com', 443), ('www.github.com', 443)]  # Example hosts and ports
+        hosts_ports = [ ('www.pesuacademy.com', 443),('www.facebook.com', 443), ('www.github.com', 443)]  
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         excel_path = os.path.join(script_dir, "speed_data.xlsx")
@@ -115,7 +113,7 @@ class MainWindow(QtWidgets.QMainWindow):
             speed_tester.speed_update.connect(self.update_speed_label)
             self.speed_testers.append(speed_tester)
 
-            speed_tester.start()  # Start the thread
+            speed_tester.start()  
 
     @QtCore.pyqtSlot(str, float, float, float, float)
     def update_speed_label(self, host, download_speed, upload_speed, _, ping_time):
@@ -140,7 +138,7 @@ def closeEvent(self, event):
         tester.stop()
     super().closeEvent(event)
     print("Application closed.")
-    QtCore.QCoreApplication.quit()  # Quit the application explicitly
+    QtCore.QCoreApplication.quit()  
 
 
 if __name__ == "__main__":
