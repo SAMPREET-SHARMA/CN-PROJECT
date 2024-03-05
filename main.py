@@ -34,7 +34,7 @@ class SpeedTester(QtCore.QThread):
 
     def measure_speed(self):
         context = ssl.create_default_context()
-        context.verify_mode = ssl.CERT_REQUIRED  
+        context.verify_mode = ssl.CERT_REQUIRED 
         context.check_hostname = True  
         context.load_default_certs()  
 
@@ -70,21 +70,14 @@ class SpeedTester(QtCore.QThread):
     def measure_ping(self):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-                sock.settimeout(5)  
+                sock.settimeout(5) 
                 start_time = time.time()
                 sock.connect((self.host, self.port))
                 end_time = time.time()
-                self.ping_time = (end_time - start_time) * 1000  
+                self.ping_time = (end_time - start_time) * 1000 
         except (socket.timeout, socket.error):
             self.ping_time = 0
 
-    def measure_datagram_speed(self):
-        start_time = time.time()
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-            sock.sendto(b'', (self.host, self.port))
-            sock.recvfrom(4096)
-        end_time = time.time()
-        return 4096 / (end_time - start_time) / 1024
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -98,14 +91,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.speed_labels = {}
         self.speed_testers = []
 
-        hosts_ports = [('www.pesuacademy.com', 443), ('www.facebook.com', 443), ('www.github.com', 443)]
+        hosts_ports = [ ('www.pesuacademy.com', 443),('www.facebook.com', 443), ('www.github.com', 443)]  
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         excel_path = os.path.join(script_dir, "speed_data.xlsx")
 
         self.workbook = Workbook()
         self.sheet = self.workbook.active
-        self.sheet.append(["Host ", "Download Speed (Mbps)", "Upload Speed (Mbps)", "Ping Time (ms)"])
+        self.sheet.append(["Host ","Download Speed (Mbps)", "Upload Speed (Mbps)", "Ping Time (ms)"])
 
         for host, port in hosts_ports:
             speed_label = QtWidgets.QLabel(self)
@@ -121,7 +114,7 @@ class MainWindow(QtWidgets.QMainWindow):
             speed_tester.speed_update.connect(self.update_speed_label)
             self.speed_testers.append(speed_tester)
 
-            speed_tester.start()
+            speed_tester.start() 
 
     @QtCore.pyqtSlot(str, float, float, float, float)
     def update_speed_label(self, host, download_speed, upload_speed, _, ping_time):
@@ -139,13 +132,15 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             print("An error occurred while writing to Excel:", e)
 
-    def closeEvent(self, event):
-        print("Closing application...")
-        for tester in self.speed_testers:
-            tester.stop()
-        super().closeEvent(event)
-        print("Application closed.")
-        QtCore.QCoreApplication.quit()
+
+def closeEvent(self, event):
+    print("Closing application...")
+    for tester in self.speed_testers:
+        tester.stop()
+    super().closeEvent(event)
+    print("Application closed.")
+    QtCore.QCoreApplication.quit()  
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
